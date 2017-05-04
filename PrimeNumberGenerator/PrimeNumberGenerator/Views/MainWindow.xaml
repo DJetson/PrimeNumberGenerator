@@ -1,0 +1,60 @@
+﻿<Window x:Class="PrimeNumberGenerator.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrimeNumberGenerator"
+        xmlns:Commands="clr-namespace:PrimeNumberGenerator.Commands"
+        xmlns:BaseClasses="clr-namespace:PrimeNumberGenerator.Classes.BaseClasses"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <Commands:GenerateNextCommand x:Key="GenerateNextCommand"/>
+        <Style TargetType="{x:Type Control}">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
+            <ListView ItemsSource="{Binding Primes}" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding }" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Border>
+        <ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding GenerationStrategyList}" SelectedItem="{Binding SelectedGenerationStrategy}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type BaseClasses:ViewModelBase}">
+                    <TextBlock Text="{Binding Name}" ToolTip="{Binding Description}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <GroupBox Padding="10" Margin="5" Header="Generation Parameters" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Generate " />
+                <TextBox Text="{Binding SizeOfNextGeneratedCollection}" Grid.Column="1" />
+                <TextBlock Text=" prime numbers greater than " Grid.Column="2"/>
+                <TextBox Text="{Binding GreaterThan}" Grid.Column="3" />
+            </Grid>
+        </GroupBox>
+        <Button Grid.Column="0" Grid.Row="3" Content="Generate..." Command="{StaticResource GenerateNextCommand}" CommandParameter="{Binding }"/>
+    </Grid>
+</Window>
