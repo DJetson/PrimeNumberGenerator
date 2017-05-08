@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PrimeNumberGenerator.Interfaces
+﻿namespace PrimeNumberGenerator.Interfaces
 {
-    public interface IViewModel : INotifyPropertyChanged
+    public interface IViewModel : IDescriptiveDetails
     {
-        string Name { get; set; }
     }
 }

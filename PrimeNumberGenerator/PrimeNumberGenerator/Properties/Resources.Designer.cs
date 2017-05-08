@@ -77,5 +77,23 @@ namespace PrimeNumberGenerator.Properties {
                 return ResourceManager.GetString("BruteForceStrategyName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checks whether the candidate is evenly divisible by any prime less than the square root of the candidate.
+        /// </summary>
+        internal static string CheckPrimeFactorsOnlyStrategyDescription {
+            get {
+                return ResourceManager.GetString("CheckPrimeFactorsOnlyStrategyDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check Prime Factors Only.
+        /// </summary>
+        internal static string CheckPrimeFactorsOnlyStrategyName {
+            get {
+                return ResourceManager.GetString("CheckPrimeFactorsOnlyStrategyName", resourceCulture);
+            }
+        }
     }
 }

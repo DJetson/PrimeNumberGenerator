@@ -123,4 +123,10 @@
   <data name="BruteForceStrategyName" xml:space="preserve">
     <value>Brute Force</value>
   </data>
+  <data name="CheckPrimeFactorsOnlyStrategyDescription" xml:space="preserve">
+    <value>Checks whether the candidate is evenly divisible by any prime less than the square root of the candidate</value>
+  </data>
+  <data name="CheckPrimeFactorsOnlyStrategyName" xml:space="preserve">
+    <value>Check Prime Factors Only</value>
+  </data>
 </root>

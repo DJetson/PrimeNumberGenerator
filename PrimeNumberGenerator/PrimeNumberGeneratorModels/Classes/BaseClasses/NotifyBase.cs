@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace PrimeNumberGenerator.Classes.BaseClasses
+namespace PrimeNumberGeneratorModels.Classes.BaseClasses
 {
     public class NotifyBase : INotifyPropertyChanged
     {

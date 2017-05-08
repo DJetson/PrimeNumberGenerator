@@ -1,11 +1,6 @@
 ﻿using PrimeNumberGenerator.Classes;
 using PrimeNumberGenerator.Classes.BaseClasses;
-using PrimeNumberGenerator.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PrimeNumberGeneratorModels.Interfaces;
 
 namespace PrimeNumberGenerator.ViewModels
 {

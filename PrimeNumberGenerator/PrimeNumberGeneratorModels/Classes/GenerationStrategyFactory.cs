@@ -1,5 +1,5 @@
-﻿using PrimeNumberGenerator.Classes.Strategies;
-using PrimeNumberGenerator.Interfaces;
+﻿using PrimeNumberGeneratorModels.Classes.Strategies;
+using PrimeNumberGeneratorModels.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -8,7 +8,7 @@ namespace PrimeNumberGenerator.Classes
 {
     public class GenerationStrategyFactory
     {
-        private List<Type> _StrategyTypes = new List<Type>() { typeof(BruteForceStrategy) };
+        private List<Type> _StrategyTypes = new List<Type>() { typeof(BruteForceStrategy), typeof(CheckPrimeFactorsOnlyStrategy) };
         public List<Type> StrategyTypes
         {
             get { return _StrategyTypes; }

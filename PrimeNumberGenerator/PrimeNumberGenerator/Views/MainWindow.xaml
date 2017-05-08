@@ -29,7 +29,9 @@
             <ListView ItemsSource="{Binding Primes}" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding }" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" />
+                        <GridViewColumn Header="#" DisplayMemberBinding="{Binding Model.Id}" />
+                        <GridViewColumn Header="Value" DisplayMemberBinding="{Binding Model.Value}" />
+                        <GridViewColumn Header="Time to Calculate" DisplayMemberBinding="{Binding Model.TimeToCalculate}" />
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -51,10 +53,11 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Generate " />
                 <TextBox Text="{Binding SizeOfNextGeneratedCollection}" Grid.Column="1" />
-                <TextBlock Text=" prime numbers greater than " Grid.Column="2"/>
-                <TextBox Text="{Binding GreaterThan}" Grid.Column="3" />
+                <!--<TextBlock Text=" prime numbers greater than " Grid.Column="2"/>
+                <TextBox Text="{Binding GreaterThan}" Grid.Column="3" />-->
             </Grid>
         </GroupBox>
         <Button Grid.Column="0" Grid.Row="3" Content="Generate..." Command="{StaticResource GenerateNextCommand}" CommandParameter="{Binding }"/>
+        <TextBlock HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" Text="{Binding Milliseconds, StringFormat={}{0:f2} ms}"/>
     </Grid>
 </Window>

@@ -64,16 +64,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Classes\BaseClasses\NotifyBase.cs" />
     <Compile Include="Classes\BaseClasses\ViewModelBase.cs" />
     <Compile Include="Classes\GenerationStrategyResourceManager.cs" />
-    <Compile Include="Classes\Strategies\BruteForceStrategy.cs" />
     <Compile Include="Commands\GenerateNextCommand.cs" />
-    <Compile Include="Interfaces\IGenerationStrategy.cs" />
-    <Compile Include="Interfaces\IOption.cs" />
+    <Compile Include="Interfaces\IDescriptiveDetails.cs" />
+    <Compile Include="Interfaces\IGenerationStrategyViewModel.cs" />
+    <Compile Include="Interfaces\IHasDescription.cs" />
+    <Compile Include="Interfaces\IHasName.cs" />
+    <Compile Include="Interfaces\IOptionViewModel.cs" />
     <Compile Include="Interfaces\IViewModel.cs" />
-    <Compile Include="Classes\GenerationStrategyFactory.cs" />
     <Compile Include="ViewModels\GenerationStrategyViewModel.cs" />
+    <Compile Include="ViewModels\PrimeViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -81,7 +82,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="Classes\PrimeGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -108,7 +108,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\PrimeNumberGeneratorModels\PrimeNumberGeneratorModels.csproj">
+      <Project>{6810FA39-18B6-48BC-AFD3-F0CD432B6BD9}</Project>
+      <Name>PrimeNumberGeneratorModels</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

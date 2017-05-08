@@ -1,11 +1,11 @@
 ﻿using PrimeNumberGenerator.Classes;
-using PrimeNumberGenerator.Interfaces;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Linq;
-using System.Reflection;
+using System.Diagnostics;
+using PrimeNumberGeneratorModels.Interfaces;
+using System.Collections.Generic;
 using System;
 
 namespace PrimeNumberGenerator.ViewModels
@@ -19,8 +19,9 @@ namespace PrimeNumberGenerator.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
-        private ObservableCollection<long> _Primes = new ObservableCollection<long>() { 1, 2, 3 };
-        public ObservableCollection<long> Primes
+        private ObservableCollection<PrimeViewModel> _Primes = new ObservableCollection<PrimeViewModel>() { new PrimeViewModel(1,1,TimeSpan.Zero),
+                                                                                                            new PrimeViewModel(2,2,TimeSpan.Zero) };
+        public ObservableCollection<PrimeViewModel> Primes
         {
             get { return _Primes; }
             set { _Primes = value; NotifyPropertyChanged(); }
@@ -31,6 +32,13 @@ namespace PrimeNumberGenerator.ViewModels
         {
             get { return _GreaterThan; }
             set { _GreaterThan = value; NotifyPropertyChanged(); }
+        }
+
+        private double _Milliseconds = 0.0;
+        public double Milliseconds
+        {
+            get { return _Milliseconds; }
+            set { _Milliseconds = value; NotifyPropertyChanged(); }
         }
 
         private int _SizeOfNextGeneratedCollection = 100;
@@ -55,6 +63,7 @@ namespace PrimeNumberGenerator.ViewModels
         }
 
         private GenerationStrategyFactory _GenerationStrategyFactory = new GenerationStrategyFactory();
+        private Stopwatch _stopwatch = Stopwatch.StartNew();
 
         public MainWindowViewModel()
         {
@@ -70,11 +79,36 @@ namespace PrimeNumberGenerator.ViewModels
         {
             int count = SizeOfNextGeneratedCollection == -1 ? int.MaxValue : SizeOfNextGeneratedCollection;
 
+            _stopwatch.Start();
+
             for (int i = 0; i < SizeOfNextGeneratedCollection; i++)
             {
-                Primes.Add(SelectedGenerationStrategy.Model.GeneratePrime(GreaterThan));
-                GreaterThan = Primes.Last();
+                NextPrime();
             }
+
+            _stopwatch.Stop();
+            Milliseconds = (double)((float)_stopwatch.Elapsed.Ticks / 10000.0f);
+        }
+
+        public long NextPrime()
+        {
+            long currentCandidate = Primes.Last().Model.Value + 1;
+            
+            while (currentCandidate < long.MaxValue)
+            {
+                long startTicks = _stopwatch.ElapsedTicks;
+
+                if (SelectedGenerationStrategy.Model.ValidatePrime(currentCandidate))
+                {
+                    long elapsed = _stopwatch.ElapsedTicks - startTicks;
+                    Primes.Add(new PrimeViewModel(Primes.Last().Model.Id + 1,currentCandidate,new TimeSpan(elapsed)));
+                    return currentCandidate;
+                }
+                else
+                    currentCandidate++;
+            }
+
+            throw new OverflowException($"No prime numbers exist found between {currentCandidate} and {long.MaxValue}.");
         }
 
     }
